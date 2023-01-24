@@ -17,15 +17,12 @@ class EmojiTableViewController: UITableViewController {
         Emoji(emoji: "🍕", name: "Pizza", description: "Time to pizza")
     ]
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-    }
-
+    
+    
     @IBAction func mixButton(_ sender: UIBarButtonItem) {
         objects.shuffle()
-
+        tableView.reloadData()
+        
     }
     // MARK: - Table view data source
 
@@ -46,6 +43,21 @@ class EmojiTableViewController: UITableViewController {
         cell.set(object: object)
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        100
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let degree: Double = 90
+        let rotationAngle = CGFloat(degree * Double.pi / 180)
+        let rotationTransform = CATransform3DMakeRotation(rotationAngle, 1, 0, 0)
+        cell.layer.transform = rotationTransform
+        
+        UIView.animate(withDuration: 1, delay: 0.1, options: .curveEaseInOut, animations: {
+            cell.layer.transform = CATransform3DIdentity
+        })
     }
 
     /*

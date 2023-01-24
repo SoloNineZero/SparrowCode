@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Emoji {
+struct Emoji: Hashable {
     let emoji: String
     let name: String
     let description: String
