@@ -17,6 +17,11 @@ class EmojiTableViewController: UITableViewController {
         Emoji(emoji: "🍕", name: "Pizza", description: "Time to pizza")
     ]
     
+    
+    override func viewDidLoad() {
+        title = "Emoji"
+    }
+    
     @IBAction func mixButton(_ sender: UIBarButtonItem) {
         objects.shuffle()
         tableView.reloadData()
