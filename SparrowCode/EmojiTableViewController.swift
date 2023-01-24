@@ -17,13 +17,9 @@ class EmojiTableViewController: UITableViewController {
         Emoji(emoji: "🍕", name: "Pizza", description: "Time to pizza")
     ]
     
-    
-    
     @IBAction func mixButton(_ sender: UIBarButtonItem) {
         objects.shuffle()
         tableView.reloadData()
-        
-        
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -35,7 +31,8 @@ class EmojiTableViewController: UITableViewController {
         return objects.count
     }
     
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
             tableView.cellForRow(at: indexPath)?.accessoryType = .none
         } else {
@@ -53,18 +50,10 @@ class EmojiTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //        let translationTransform = CATransform3DTranslate(CATransform3DIdentity, -500, 0, 0)
-        //        cell.layer.transform = translationTransform
-        //
-        //        UIView.animate(withDuration: 1, delay: 0.2 * Double(indexPath.row), animations: {
-        //            cell.layer.transform = CATransform3DIdentity
-        
-        
         cell.transform = CGAffineTransform(translationX: cell.contentView.frame.width, y: 0)
         UIView.animate(withDuration: 1, delay: 0.1 * Double(indexPath.row), usingSpringWithDamping: 0.4, initialSpringVelocity: 0.1, options: .curveEaseIn, animations: {
             cell.transform = CGAffineTransform(translationX: cell.contentView.frame.width, y: cell.contentView.frame.height)
         })
-        
     }
     
 }
