@@ -8,7 +8,7 @@
 import UIKit
 
 class EmojiTableViewController: UITableViewController {
-
+    
     var objects = [
         Emoji(emoji: "🐇", name: "Rabbit", description: "Why do you need a rabbit paw? Take the whole!"),
         Emoji(emoji: "🍀", name: "Clover", description: "May he bring good luck"),
@@ -25,17 +25,17 @@ class EmojiTableViewController: UITableViewController {
         
     }
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return objects.count
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "emojiCell", for: indexPath) as! EmojiTableViewCell
@@ -45,17 +45,11 @@ class EmojiTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        100
-    }
-    
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let degree: Double = 90
-        let rotationAngle = CGFloat(degree * Double.pi / 180)
-        let rotationTransform = CATransform3DMakeRotation(rotationAngle, 1, 0, 0)
-        cell.layer.transform = rotationTransform
+        let translationTransform = CATransform3DTranslate(CATransform3DIdentity, -500, 0, 0)
+        cell.layer.transform = translationTransform
         
-        UIView.animate(withDuration: 1, delay: 0.1, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 1, delay: 0.2 * Double(indexPath.row), animations: {
             cell.layer.transform = CATransform3DIdentity
         })
     }
