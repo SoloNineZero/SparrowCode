@@ -18,4 +18,5 @@ class EmojiTableViewCell: UITableViewCell {
         self.nameLabel.text = object.name
         self.descriptionLabel.text = object.description
     }
+    
 }
